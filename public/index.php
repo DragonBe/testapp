@@ -33,7 +33,21 @@ $serviceFactory = new \OAuth\ServiceFactory();
 
 // Home page
 $app->get('/', function () use ($app) {
-    return $app['twig']->render('home.twig', array ('account' => isset ($_SESSION['github'])));
+    $account = array (
+        'avatar_url' => null,
+        'login' => null,
+        'name' => null,
+        'authenticated' => false,
+    );
+
+    if (isset ($_SESSION['github'])) {
+        $account = $_SESSION['github']['account'];
+        $account['authenticated'] = true;
+    }
+
+    return $app['twig']->render('home.twig', array (
+        'account' => $account,
+    ));
 })
 ->bind('home');
 
@@ -58,9 +72,10 @@ $app->get('/login', function () use ($app, $config, $serviceFactory) {
         // This was a callback request from github, get the token
         $gitHub->requestAccessToken($_GET['code']);
         $result = json_decode($gitHub->request('user'), true);
+        $result['authenticated'] = true;
         $_SESSION['github'] = array (
             'token' => $_SESSION['lusitanian_oauth_token']['GitHub'],
-            'account' => serialize($result),
+            'account' => $result,
         );
 
         if (isset ($result['id'])) {
@@ -88,7 +103,7 @@ $app->get('/logout', function () use ($app) {
 ->bind('logout');
 
 $app->get('/profile', function () use ($app) {
-    return $app['twig']->render('profile.twig', array ('account' => unserialize($_SESSION['github']['account'])));
+    return $app['twig']->render('profile.twig', array ('account' => $_SESSION['github']['account']));
 })
 ->bind('profile');
 
