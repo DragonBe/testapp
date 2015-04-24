@@ -1,0 +1,66 @@
+{% extends 'base.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+    <h1>Profile {{ account.name }}</h1>
+
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="thumbnail"><img src="{{ account.avatar_url }}" alt="{{ account.login }}"></div>
+        </div>
+        <div class="col-sm-6">
+            <dl>
+                <dt>Profile</dt>
+                <dd>{{ account.name }}</dd>
+                <dd>{{ account.email }}</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="row">
+        <form name="preference">
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="mentorship" id="mentorship" value="1">
+                        I want to be a mentor.
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="apprenticeship" id="apprenticeship" value="1">
+                        I want to be an apprentice.
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="interests">My interest tags</label>
+                <input type="text" class="form-control" name="interests" id="interests" value="">
+            </div>
+            <input type="submit" class="btn btn-default" value="Save profile">
+        </form>
+    </div>
+
+{% endblock %}
+
+{% if account.name %}
+    {% block account %}
+        <a href="{{ app.url_generator.generate('login') }}"><img src="{{ account.avatar_url }}" width="24" height="24" alt="{{ account.login }}">&nbsp;{{ account.name }}</a> |
+        <a href="{{ app.url_generator.generate('logout') }}">Logout</a>
+    {% endblock %}
+{% endif %}
+
+{% block style %}
+.github-oauth-btn {
+    background-color: black;
+    color: white;
+    background-image: url('https://d2dfho4r6t7asi.cloudfront.net/assets/github-login-white-6280bc920b47ac76df501a8e55d99865.png');
+    background-repeat: no-repeat;
+    padding-left: 40px;
+}
+.github-oauth-btn:hover {
+    background-color: #525252;
+    color: white;
+}
+{% endblock %}

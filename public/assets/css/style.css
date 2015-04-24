@@ -1,0 +1,9 @@
+.github-oauth-btn {
+    background-color: black;
+    color: white;
+    background-image: url('https://d2dfho4r6t7asi.cloudfront.net/assets/github-login-white-6280bc920b47ac76df501a8e55d99865.png');
+    background-repeat: no-repeat;
+}
+.github-oauth-btn:hover {
+    background-color: #525252;
+}

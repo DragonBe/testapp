@@ -1,0 +1,17 @@
+{
+  "name": "phpmentoring/testapp",
+  "description": "Application to manage mentors and apprentices",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Michelangelo van Dam",
+      "email": "dragonbe+github@gmail.com"
+    }
+  ],
+  "require": {
+    "silex/silex": "v1.2.4",
+    "twig/twig": "1.6.5",
+    "lusitanian/oauth": "v0.3.5"
+  }
+}
