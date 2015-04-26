@@ -1,7 +1,7 @@
 <?php
 $config = array (
     'db' => array (
-        'dsn' => 'mysql:127.0.0.1&dbname=test',
+        'dsn' => 'mysql:host=127.0.0.1;port=3306;dbname=test;charset=utf8',
         'username' => '',
         'password' => '',
     ),

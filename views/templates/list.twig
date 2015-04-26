@@ -1,0 +1,30 @@
+{% extends 'base.twig' %}
+
+{% block title %}Search for {{ keywordList }}{% endblock %}
+
+{% block content %}
+    {% for person in list %}
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="thumbnail"><img src="{{ person.avatar_url }}" alt="{{ person.login }}"></div>
+            </div>
+            <div class="col-sm-6">
+                <dl>
+                    <dt>Profile</dt>
+                    <dd>{{ person.name }}</dd>
+                    <dd>{{ person.email }}</dd>
+                    <dd><a href="{{ person.html_url }}">{{ person.html_url }}</a></dd>
+                    <dd>{{ person.company }}</dd>
+                    <dd>{{ person.location }}</dd>
+                </dl>
+            </div>
+            <div class="col-sm-4">
+                <dl>
+                <dt>Tag</dd>
+                    <dd>{{ person.tag }}</dd>
+                </dl>
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}

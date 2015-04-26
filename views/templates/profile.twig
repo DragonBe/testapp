@@ -22,26 +22,39 @@
         </div>
     </div>
     <div class="row">
-        <form name="preference">
+        <form name="preference" method="post" action="{{ app.url_generator.generate('profile-post') }}">
             <div class="form-group">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="mentorship" id="mentorship" value="1">
+                        <input type="checkbox" name="mentorship" id="mentorship" value="1" {% if interest.mentor %}checked="checked"{% endif %}>
                         I want to be a mentor.
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="apprenticeship" id="apprenticeship" value="1">
+                        <input type="checkbox" name="apprenticeship" id="apprenticeship" value="1" {% if interest.apprentice %}checked="checked"{% endif %}>
                         I want to be an apprentice.
                     </label>
                 </div>
             </div>
             <div class="form-group">
                 <label for="interests">My interest tags</label>
-                <input type="text" class="form-control" name="interests" id="interests" value="">
+                <input type="text" class="form-control" name="interests" id="interests" value="{{ tags }}">
+                <span id="helpBlock" class="help-block">Use a comma to seperate tags (e.g. php, oop, spl)</span>
             </div>
             <input type="submit" class="btn btn-default" value="Save profile">
+        </form>
+    </div>
+    <hr>
+    <div class="row">
+        <form name="search" method="get" action="{{ app.url_generator.generate('list') }}">
+            <div class="form-group">
+                <label>Find profiles based on tags
+                    <input type="text" class="form-control" name="keywords" id="keywords" value="">
+                    <span id="helpBlock" class="help-block">Use a comma to seperate tags (e.g. php, oop, spl)</span>
+                </label>
+            </div>
+            <input type="submit" class="btn btn-default" value="Search">
         </form>
     </div>
 
